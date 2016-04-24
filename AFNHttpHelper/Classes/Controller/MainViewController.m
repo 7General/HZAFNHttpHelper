@@ -30,8 +30,8 @@
     
     
 //    [self basicURLRequest];
-    [self AFNBasicGETRequest];
-//    [self AFNBasicRequesthttpBody];
+    //[self AFNBasicGETRequest];
+    [self AFNBasicRequesthttpBody];
     
     //[self BaseDownloadImage];
     //[self AFNDownloadImage];
@@ -58,7 +58,7 @@
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     
-    [request addValue:@"application/json" forHTTPHeaderField:@"request"];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"request"];
     //4.修改请求方法为POST
     request.HTTPMethod = @"POST";
     
@@ -210,10 +210,12 @@
     
     //NSString *url = @"http://open.qyer.com/qyer/bbs/forum_thread_list?client_id=qyer_android&client_secret=9fcaae8aefc4f9ac4915&forum_id=1&type=1&count=10&page=1&delcache=0";
     
-    
+//    NSString * url = @"http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day=0";
     
     NSURL *URL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.HTTPMethod = @"GET";
     NSError*  error;
     //5.设置请求体
@@ -226,7 +228,7 @@
         if (error) {
             NSLog(@"-------Error: %@", error);
         } else {
-            NSLog(@">>>>>%@", responseObject);
+            NSLog(@">>>>>%@", responseObject[@"info"]);
         }
     }];
     
