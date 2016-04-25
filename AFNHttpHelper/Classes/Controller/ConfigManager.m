@@ -17,7 +17,7 @@
     
     NSMutableDictionary *dic =[[NSMutableDictionary alloc]init];
     
-    if ([string isEqualToString:@"GET"]) {
+    if ([string isEqualToString:@"list"]) {
         NSString *url = APIHOSTGET;
         url =[url stringByAppendingString:@""];
         NSString *method =@"GET";
@@ -26,7 +26,7 @@
         dic =tem;
     }
     
-    if ([string isEqualToString:@"POST"]) {
+    if ([string isEqualToString:@"login"]) {
         NSString *url = APIHOSTPOST;
         url =[url stringByAppendingString:@"/app/v1/user/userlogin.do"];
         NSString *method =@"POST";

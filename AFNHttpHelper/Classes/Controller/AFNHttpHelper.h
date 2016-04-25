@@ -20,18 +20,21 @@ typedef void(^failureBlock)(id error);
 + (AFNHttpHelper *)defaultManager;
 
 
--(void)HttpRequestGetRequestWithString:(NSString *)requstString
+-(void)GET:(NSString *)requstString
                             parameters:(NSDictionary *)parameters
                                success:(successBlock)success
                                failure:(failureBlock)failure;
 
 
--(void)HttpRequestPostRequestWithString:(NSString *)requstString
+-(void)POST:(NSString *)requstString
                              parameters:(NSDictionary *)parameters
                                 success:(successBlock)success
                                 failure:(failureBlock)failure;
 
-
+-(void)requestHttpByUserWithString:(NSString *)requstString
+                        parameters:(NSDictionary *)parameters
+                           success:(successBlock)success
+                           failure:(failureBlock)failure;
 
 
 @end

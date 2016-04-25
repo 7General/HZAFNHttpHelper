@@ -11,6 +11,7 @@
 #import "Additions.h"
 #import "AFNHttpHelper.h"
 #import "NextViewController.h"
+#import "AFHttpTool.h"
 
 typedef void(^testBlock)(NSString * names);
 
@@ -44,46 +45,83 @@ typedef void(^testBlock)(NSString * names);
 //    btn.backgroundColor = [UIColor redColor];
 //    [btn addTarget:self action:@selector(testCliclAction) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:btn];
-//    
+
+
     
-//    [self basicURLRequest];
-    //[self AFNBasicGETRequest];
+    
+    //NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
+    
+    
+//    NSDictionary * parameters = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
+//    [[AFHttpTool defaultManager] requestHttpByUserWithString:@"GET" parameters:parameters success:^(id responseObject) {
+//        NSLog(@"----->>>>%@",responseObject);
+//    } failure:^(NSError *error) {
+//        NSLog(@"---<<<<<<%@",error);
+//    }];
+    
+    
+    NSDictionary * parameterslist = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
+    
+    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
+    [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"login" parameters:parameters success:^(id responseObject) {
+        NSLog(@"---->>>>%@",responseObject);
+    } failure:^(id error) {
+        NSLog(@"----<<<<<<<%@",error);
+    }];
+    
+    
+    [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"list" parameters:parameterslist success:^(id responseObject) {
+        NSLog(@"---->>>>%@",responseObject);
+    } failure:^(id error) {
+        NSLog(@"----<<<<<<<%@",error);
+    }];
+    
+    
+    
+    
+    
+    
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 100, 320, 100)];
+    [self.view addSubview:self.imageView];
+    
+    
+    
+   
+}
+
+-(void)test2 {
+    
+    //    [self basicURLRequest];
+    [self AFNBasicGETRequest];
     //[self AFNBasicRequesthttpBody];
     
     //[self BaseDownloadImage];
-    [self AFNDownloadImage];
+    //[self AFNDownloadImage];
     
-//    [self BasicPostRequst];
+    //    [self BasicPostRequst];
     
     // AFNGET网络请求
-//    NSDictionary * dict = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
-//    [[AFNHttpHelper defaultManager] HttpRequestGetRequestWithString:@"GET" parameters:dict success:^(id responseObject) {
-//        NSLog(@"----%@",responseObject);
-//    } failure:^(id error) {
-//        
-//    }];
+    //    NSDictionary * dict = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
+    //    [[AFNHttpHelper defaultManager] HttpRequestGetRequestWithString:@"GET" parameters:dict success:^(id responseObject) {
+    //        NSLog(@"----%@",responseObject);
+    //    } failure:^(id error) {
+    //
+    //    }];
     
     
     
     
     //[self AFNHttpPostRequest];
     
-//    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
-//    [[AFNHttpHelper defaultManager] HttpRequestPostRequestWithString:@"POST" parameters:parameters success:^(id responseObject) {
-//        NSLog(@"---yes-->>>%@",responseObject);
-//    } failure:^(id error) {
-//        NSLog(@"---no--<<<<<<<%@",error);
-//    }];
-    
-    
-    
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 100, 320, 100)];
-//    self.imageView.backgroundColor  = [UIColor redColor];
-    [self.view addSubview:self.imageView];
-    
+    //    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
+    //    [[AFNHttpHelper defaultManager] HttpRequestPostRequestWithString:@"POST" parameters:parameters success:^(id responseObject) {
+    //        NSLog(@"---yes-->>>%@",responseObject);
+    //    } failure:^(id error) {
+    //        NSLog(@"---no--<<<<<<<%@",error);
+    //    }];
+
+
 }
-
-
 
 
 

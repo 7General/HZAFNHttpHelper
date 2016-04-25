@@ -16,6 +16,15 @@
 
 @implementation AFNHttpHelper
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        NSLog(@"---启动AFNHttpHelper");
+    }
+    return self;
+}
+
 + (instancetype)defaultManager {
     static AFNHttpHelper * defaultManager = nil;
     static dispatch_once_t onceToken;
@@ -27,7 +36,7 @@
 
 
 
--(void)HttpRequestGetRequestWithString:(NSString *)requstString
+-(void)GET:(NSString *)requstString
                                                      parameters:(NSDictionary *)parameters
                                                           success:(successBlock)success
                                                               failure:(failureBlock)failure
@@ -66,12 +75,13 @@
     [dataTask resume];
 }
 
--(void)HttpRequestPostRequestWithString:(NSString *)requstString
+-(void)POST:(NSString *)requstString
                             parameters:(NSDictionary *)parameters
                                success:(successBlock)success
                                 failure:(failureBlock)failure {
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.timeoutIntervalForRequest = TIMEOUT;
+
     AFURLSessionManager * manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
     NSDictionary *requestDic =[ConfigManager requestDicWithString:requstString];
@@ -80,6 +90,7 @@
     
     NSURL *URL = [NSURL URLWithString:url];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:URL];
+    
     /*!
      *  设置发送数据格式为json
      */
@@ -114,26 +125,52 @@
 
 
 
--(void)CreatingaDownloadTask {
-    NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager * manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
-    NSURL * url = [NSURL URLWithString:@"http://image.tianjimedia.com/uploadImages/2011/252/8GO666XNQM49.jpg"];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    NSURLSessionDownloadTask * task = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        
-        NSURL *downloadURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        return [downloadURL URLByAppendingPathComponent:[response suggestedFilename]];
-        
-    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        if (!error) {
-            //此处已经在主线程了
-            //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:filePath]];
-            //self.imageView.image = image;
-        }
-    }];
+//-(void)CreatingaDownloadTask {
+//    NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    AFURLSessionManager * manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
+//    NSURL * url = [NSURL URLWithString:@"http://image.tianjimedia.com/uploadImages/2011/252/8GO666XNQM49.jpg"];
+//    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+//    NSURLSessionDownloadTask * task = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+//        
+//        NSURL *downloadURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+//        return [downloadURL URLByAppendingPathComponent:[response suggestedFilename]];
+//        
+//    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+//        if (!error) {
+//            //此处已经在主线程了
+//            //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:filePath]];
+//            //self.imageView.image = image;
+//        }
+//    }];
+//    
+//    [task resume];
+//
+//}
+
+
+
+
+-(void)requestHttpByUserWithString:(NSString *)requstString
+                        parameters:(NSDictionary *)parameters
+                           success:(successBlock)success
+                           failure:(failureBlock)failure {
+    NSDictionary *requestDic =[ConfigManager requestDicWithString:requstString];
     
-    [task resume];
+    NSString *method =[requestDic objectForKey:@"method"];
+    if ([method isEqualToString:@"POST"]) {
+        NSLog(@"POST");
+        [self POST:requstString parameters:parameters success:success failure:failure];
+    }
+    if ([method isEqualToString:@"GET"]) {
+        NSLog(@"GET");
+        //[self GET:url params:parameters successBlock:success failureBlock:failure];
+        [self GET:requstString parameters:parameters success:success failure:failure];
+    }
 
 }
+
+
+
+
 
 @end
