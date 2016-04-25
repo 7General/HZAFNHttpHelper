@@ -134,6 +134,7 @@
  *  @return <#return value description#>
  */
 - (NSString *)queryStringNoEncodeFromDictionary:(NSDictionary *)dict;
++ (NSString *)queryStringFromDictionary:(NSDictionary *)dict addingPercentEscapes:(BOOL)add;
 
 /**
  *  转换字符

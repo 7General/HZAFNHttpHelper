@@ -8,45 +8,135 @@
 
 #import "MainViewController.h"
 #import "AFNetworking.h"
+#import "Additions.h"
+#import "AFNHttpHelper.h"
+#import "NextViewController.h"
+
+typedef void(^testBlock)(NSString * names);
 
 
 @interface MainViewController ()
 
 @property (nonatomic, strong) UIImageView * imageView;
 
+@property (nonatomic, copy) testBlock  testB;
+
 @end
 
 @implementation MainViewController
 
+-(void)setTestB:(testBlock)testB {
+    _testB = testB;
+}
+
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.view appear];
+//    [self.view appear];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor grayColor];
+
     self.title = @"网络请求";
     
+//    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btn.frame = CGRectMake(100, 200, 100, 100);
+//    btn.backgroundColor = [UIColor redColor];
+//    [btn addTarget:self action:@selector(testCliclAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn];
+//    
     
 //    [self basicURLRequest];
     //[self AFNBasicGETRequest];
-    [self AFNBasicRequesthttpBody];
+    //[self AFNBasicRequesthttpBody];
     
     //[self BaseDownloadImage];
-    //[self AFNDownloadImage];
+    [self AFNDownloadImage];
     
 //    [self BasicPostRequst];
+    
+    // AFNGET网络请求
+//    NSDictionary * dict = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
+//    [[AFNHttpHelper defaultManager] HttpRequestGetRequestWithString:@"GET" parameters:dict success:^(id responseObject) {
+//        NSLog(@"----%@",responseObject);
+//    } failure:^(id error) {
+//        
+//    }];
+    
+    
+    
+    
+    //[self AFNHttpPostRequest];
+    
+//    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
+//    [[AFNHttpHelper defaultManager] HttpRequestPostRequestWithString:@"POST" parameters:parameters success:^(id responseObject) {
+//        NSLog(@"---yes-->>>%@",responseObject);
+//    } failure:^(id error) {
+//        NSLog(@"---no--<<<<<<<%@",error);
+//    }];
+    
+    
+    
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 100, 320, 100)];
-    self.imageView.backgroundColor  = [UIColor redColor];
+//    self.imageView.backgroundColor  = [UIColor redColor];
     [self.view addSubview:self.imageView];
     
 }
 
--(void)BasicPostRequst {
+
+
+
+
+-(void)testCliclAction {
+    NextViewController * next = [[NextViewController alloc] init];
+    //next.cancelBlock = ^(NSString * str ) {
+//        NSLog(@"------");
+//    };
+    [self.navigationController pushViewController:next animated:YES];
     
+   
+}
+
+
+
+-(void)test {
+    
+    //    NSDictionary * param = @{@"userID":@"上平32",@"verCode":@"123"};
+    //    NSString * entUrl = [NSString stringWithFormat:@"/%@/%@",@"ddd",@"tttttt"];
+    //    NSString * str =  [NSString queryStringFromDictionary:param addingPercentEscapes:NO];
+    //    NSLog(@"====<<<<<%@",str);
+    
+}
+
+-(void)AFNHttpPostRequest {
+    NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager * manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURL *url = [NSURL URLWithString:@"http://icloud.chinacloudapp.cn/icloud/app/v1/user/userlogin.do"];
+    
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
+    NSError*  error;
+    //5.设置请求体
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    
+    
+    NSURLSessionDataTask * task = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"---%@",responseObject);
+        }
+    }];
+    [task resume];
+}
+
+
+-(void)BasicPostRequst {
     //1.创建会话对象
-    //NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession * session = [NSURLSession sessionWithConfiguration:configuration];
     //2.根据会话对象创建task
@@ -57,8 +147,6 @@
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    
-//    [request addValue:@"application/json" forHTTPHeaderField:@"request"];
     //4.修改请求方法为POST
     request.HTTPMethod = @"POST";
     
@@ -199,28 +287,15 @@
 //    configuration.timeoutIntervalForRequest = 15;
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
-    NSString *url = @"http://open.qyer.com/qyer/bbs/forum_thread_list";
-    NSDictionary * dict = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1",@"type":@"1",@"count":@"10",@"page":@"1",@"delcache":@"0"};
 
+    NSString *url = @"http://open.qyer.com/qyer/bbs/forum_thread_list";
+
+    NSDictionary * dict = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
     
-//    NSString * url = @"http://php.weather.sina.com.cn/xml.php";
-//    NSDictionary * dict = @{@"city":@"%B1%B1%BE%A9",@"password":@"DJOYnieT8234jlsK",@"day":@"0"};
+    NSString *URLFellowString = [@"?" stringByAppendingString:[NSString queryStringFromDictionary:dict addingPercentEscapes:YES]];
     
-    
-    
-    //NSString *url = @"http://open.qyer.com/qyer/bbs/forum_thread_list?client_id=qyer_android&client_secret=9fcaae8aefc4f9ac4915&forum_id=1&type=1&count=10&page=1&delcache=0";
-    
-//    NSString * url = @"http://php.weather.sina.com.cn/xml.php?city=%B1%B1%BE%A9&password=DJOYnieT8234jlsK&day=0";
-    
-    NSURL *URL = [NSURL URLWithString:url];
+    NSURL *URL = [NSURL URLWithString:[url stringByAppendingString:URLFellowString]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    request.HTTPMethod = @"GET";
-    NSError*  error;
-    //5.设置请求体
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
-    request.HTTPBody = jsonData;
 
     
     
@@ -228,7 +303,7 @@
         if (error) {
             NSLog(@"-------Error: %@", error);
         } else {
-            NSLog(@">>>>>%@", responseObject[@"info"]);
+            NSLog(@">>>>>%@", responseObject);
         }
     }];
     
