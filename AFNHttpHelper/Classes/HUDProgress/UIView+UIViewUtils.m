@@ -6,7 +6,7 @@
 //  Copyright © 2016年 王会洲. All rights reserved.
 //
 #define hudViewTag                     0x98751235
-
+#define hudActionTag                   0x98751367
 #import "UIView+UIViewUtils.h"
 
 @implementation UIView (UIViewUtils)
@@ -18,7 +18,7 @@
  *  显示错误信息带角标提示
  */
 
--(void)showHUDIndicatorViewErrorAtCenter:(NSString *)error {
+-(void)showHUDViewErrorAtCenter:(NSString *)error {
     [self showHUDIndicatorViewAtCenter:error icon:@"error.png"];
     [self hide:YES afterDelay:0.7];
 }
@@ -26,7 +26,7 @@
 /**
  *  显示正确提示带角标提示
  */
--(void)showHUDIndicatorViewSuccessAtCenter:(NSString *)success {
+-(void)showHUDViewSuccessAtCenter:(NSString *)success {
     [self showHUDIndicatorViewAtCenter:success icon:@"success.png"];
     [self hide:YES afterDelay:0.7];
   
@@ -38,7 +38,10 @@
     [self performSelector:@selector(hideDelayed:) withObject:[NSNumber numberWithBool:animated] afterDelay:delay];
 }
 - (void)hideDelayed:(NSNumber *)animated {
-    [self hideHUDIndicatorViewAtCenter];
+    //[self hideHUDIndicatorViewAtCenter];
+    MBProgressHUD *hud = [self getHUDIndicatorViewAtCenter:hudActionTag];
+    
+    [hud hide:YES];
 }
 
 
@@ -50,9 +53,9 @@
  */
 - (void)showHUDIndicatorViewAtCenter:(NSString *)indiTitle icon:(NSString *)iconStr
 {
-    MBProgressHUD *hud = [self getHUDIndicatorViewAtCenter];
+    MBProgressHUD *hud = [self getHUDIndicatorViewAtCenter:hudActionTag];
     if (hud == nil){
-        hud = [self createHUDIndicatorViewAtCenter:indiTitle icon:iconStr yOffset:0];
+        hud = [self createHUDIndicatorViewAtCenter:indiTitle icon:iconStr yOffset:0 withTag:hudActionTag];
         [hud show:YES];
     }else{
         hud.labelText = indiTitle;
@@ -71,9 +74,9 @@
  */
 - (void)showHUDIndicatorViewAtCenter:(NSString *)indiTitle
 {
-    MBProgressHUD *hud = [self getHUDIndicatorViewAtCenter];
+    MBProgressHUD *hud = [self getHUDIndicatorViewAtCenter:hudViewTag];
     if (hud == nil){
-        hud = [self createHUDIndicatorViewAtCenter:indiTitle icon:nil yOffset:0];
+        hud = [self createHUDIndicatorViewAtCenter:indiTitle icon:nil yOffset:0 withTag:hudViewTag];
         [hud show:YES];
     }else{
         hud.labelText = indiTitle;
@@ -82,9 +85,9 @@
 
 - (void)showHUDIndicatorViewAtCenter:(NSString *)indiTitle yOffset:(CGFloat)y
 {
-    MBProgressHUD *hud = [self getHUDIndicatorViewAtCenter];
+    MBProgressHUD *hud = [self getHUDIndicatorViewAtCenter:hudViewTag];
     if (hud == nil){
-        hud = [self createHUDIndicatorViewAtCenter:indiTitle icon:nil yOffset:y];
+        hud = [self createHUDIndicatorViewAtCenter:indiTitle icon:nil yOffset:y withTag:hudViewTag];
         [hud show:YES];
     }else{
         hud.labelText = indiTitle;
@@ -96,13 +99,12 @@
  */
 - (void)hideHUDIndicatorViewAtCenter
 {
-    MBProgressHUD *hud = [self getHUDIndicatorViewAtCenter];
-    
+    MBProgressHUD *hud = [self getHUDIndicatorViewAtCenter:hudViewTag];
     [hud hide:YES];
 }
 
 
-- (MBProgressHUD *)createHUDIndicatorViewAtCenter:(NSString *)indiTitle icon:(NSString *)icon yOffset:(CGFloat)y
+- (MBProgressHUD *)createHUDIndicatorViewAtCenter:(NSString *)indiTitle icon:(NSString *)icon yOffset:(CGFloat)y withTag:(NSInteger )tags
 {
     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self];
     hud.layer.zPosition = 10;
@@ -118,13 +120,13 @@
     }
     
     [self addSubview:hud];
-    hud.tag = hudViewTag;
+    hud.tag = tags;
     return hud;
 }
 
-- (MBProgressHUD *)getHUDIndicatorViewAtCenter
+- (MBProgressHUD *)getHUDIndicatorViewAtCenter:(NSInteger)tags
 {
-    UIView *view = [self viewWithTagNotDeepCounting:hudViewTag];
+    UIView *view = [self viewWithTagNotDeepCounting:tags];
     if (view != nil && [view isKindOfClass:[MBProgressHUD class]]){
         return (MBProgressHUD *)view;
     }

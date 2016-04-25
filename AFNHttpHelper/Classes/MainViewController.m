@@ -144,28 +144,33 @@ typedef void(^testBlock)(NSString * names);
 }
 
 -(void)HelperGET:(UIButton *)sender {
+    
+   
     [self.view showHUDIndicatorViewAtCenter:@"HelperGET加载"];
+    
     NSDictionary * parameterslist = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
         [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"list" parameters:parameterslist success:^(id responseObject) {
             NSLog(@"---->>>>%@",responseObject);
-            [self.view hideHUDIndicatorViewAtCenter];
+//            [self.view hideHUDIndicatorViewAtCenter];
+            //[self.view showHUDIndicatorViewSuccessAtCenter:@"ddddddxxxxxxxxxxxx"];
         } failure:^(id error) {
             NSLog(@"----<<<<<<<%@",error);
-         [self.view showHUDIndicatorViewErrorAtCenter:@"加载失败"];
+         [self.view showHUDViewErrorAtCenter:@"加载失败"];
         }];
 }
 
 -(void)HelperPOST:(UIButton *)sender {
-//    [self.view showHUDIndicatorViewSuccessAtCenter:@"加载成功"];
+    
     
     [self.view showHUDIndicatorViewAtCenter:@"HelperPOST加载"];
     NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
         [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"login" parameters:parameters success:^(id responseObject) {
             NSLog(@"---->>>>%@",responseObject);
             [self.view hideHUDIndicatorViewAtCenter];
+            [self.view  showHUDViewSuccessAtCenter:@"ddddddddddddddd"];
         } failure:^(id error) {
             NSLog(@"----<<<<<<<%@",error);
-            [self.view showHUDIndicatorViewErrorAtCenter:@"加载失败"];
+            [self.view showHUDViewErrorAtCenter:@"加载失败"];
         }];
 }
 -(void)test2 {

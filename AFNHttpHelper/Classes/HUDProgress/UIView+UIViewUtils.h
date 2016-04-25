@@ -15,12 +15,12 @@
 /**
  *  显示错误信息带角标提示
  */
--(void)showHUDIndicatorViewSuccessAtCenter:(NSString *)success;
+-(void)showHUDViewSuccessAtCenter:(NSString *)success;
 
 /**
  *  显示正确提示带角标提示
  */
--(void)showHUDIndicatorViewErrorAtCenter:(NSString *)error;
+-(void)showHUDViewErrorAtCenter:(NSString *)error;
 
 /**
  *  网络请求相关提示
@@ -32,12 +32,6 @@
  *  隐藏弹层
  */
 - (void)hideHUDIndicatorViewAtCenter;
-/*
+
 - (void)showHUDIndicatorViewAtCenter:(NSString *)indiTitle yOffset:(CGFloat)y;
-- (MBProgressHUD *)createHUDIndicatorViewAtCenter:(NSString *)indiTitle icon:(NSString *)icon yOffset:(CGFloat)y;
-- (MBProgressHUD *)getHUDIndicatorViewAtCenter;
-
-
-- (UIView *)viewWithTagNotDeepCounting:(NSInteger)tag;
- */
 @end
