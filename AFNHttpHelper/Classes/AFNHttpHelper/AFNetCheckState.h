@@ -11,10 +11,10 @@
 
 
 typedef enum{
-    NetStatusNotReachable,
-    NetStatusReachableViaWiFi,
-    NetStatusReachableViaWWAN,
-    NetStatusReachabilityUnknown
+    WorkStatusNotReachable,               // 没有网络
+    WorkStatusReachableViaWiFi,        // WIFI状态
+    WorkStatusReachableViaWWAN,   // 手机自带网络
+    WorkStatusReachabilityUnknown,   // 没有网络
 } NetWorkState;
 
 

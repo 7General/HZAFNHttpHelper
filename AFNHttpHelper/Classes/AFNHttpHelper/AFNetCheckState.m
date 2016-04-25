@@ -35,27 +35,22 @@
         
         switch (status) {
             case AFNetworkReachabilityStatusReachableViaWiFi:
-                isExistenceNetwork = NetStatusReachableViaWiFi;
+                isExistenceNetwork = WorkStatusReachableViaWiFi;
                 NSLog(@"WIFI");
                 break;
                 
             case AFNetworkReachabilityStatusReachableViaWWAN:
-                isExistenceNetwork = NetStatusReachableViaWWAN;
+                isExistenceNetwork = WorkStatusReachableViaWWAN;
                 NSLog(@"自带网络");
                 break;
                 
             case AFNetworkReachabilityStatusNotReachable:
-                isExistenceNetwork = NetStatusNotReachable;
+                isExistenceNetwork = WorkStatusNotReachable;
                 NSLog(@"没有网络");
-                //没有网络弹窗提示
-//                if (!isExistenceNetwork) {
-//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"当前网络不可用,请检查网络连接!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//                    [alertView show];
-//                }
                 break;
                 
             case AFNetworkReachabilityStatusUnknown:
-                isExistenceNetwork = NetStatusReachabilityUnknown;
+                isExistenceNetwork = WorkStatusReachabilityUnknown;
                 NSLog(@"未知网络");
                 break;
             default:

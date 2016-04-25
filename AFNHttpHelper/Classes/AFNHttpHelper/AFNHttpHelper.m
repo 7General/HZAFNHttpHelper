@@ -14,6 +14,7 @@
 #import "ConfigManager.h"
 #import "Additions.h"
 #import "HZAFNConfig.h"
+#import "AFNetCheckState.h"
 
 
 @implementation AFNHttpHelper
@@ -44,6 +45,15 @@
                                                               failure:(failureBlock)failure
 
 {
+    
+    AFNetCheckState * checkState = [AFNetCheckState NetCheckState];
+    if (checkState.StateType == WorkStatusNotReachable || checkState.StateType == WorkStatusReachabilityUnknown) {
+        //NSLog(@"--没网状态");
+        //return;
+    }
+    //NSLog(@"--网络状态");
+    
+    
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     // 设置网络超时
     configuration.timeoutIntervalForRequest = TIMEOUT;
@@ -51,7 +61,6 @@
     
     NSDictionary *requestDic =[ConfigManager requestDicWithString:requstString];
     NSString * url = [requestDic objectForKey:@"url"];
-//    NSString *method =[requestDic objectForKey:@"method"];
     
     NSString * urlFellowString = [@"?" stringByAppendingString:[NSString queryStringFromDictionary:parameters addingPercentEscapes:YES]];
     
@@ -81,6 +90,12 @@
                             parameters:(NSDictionary *)parameters
                                success:(successBlock)success
                                 failure:(failureBlock)failure {
+    
+    
+    
+    
+    
+    
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.timeoutIntervalForRequest = TIMEOUT;
 
@@ -160,12 +175,9 @@
     
     NSString *method =[requestDic objectForKey:@"method"];
     if ([method isEqualToString:@"POST"]) {
-        NSLog(@"POST");
         [self POST:requstString parameters:parameters success:success failure:failure];
     }
     if ([method isEqualToString:@"GET"]) {
-        NSLog(@"GET");
-        //[self GET:url params:parameters successBlock:success failureBlock:failure];
         [self GET:requstString parameters:parameters success:success failure:failure];
     }
 

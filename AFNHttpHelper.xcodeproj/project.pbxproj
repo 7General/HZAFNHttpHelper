@@ -20,6 +20,10 @@
 		25F966A91CCE159F00FA1717 /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F966A11CCE159F00FA1717 /* ConfigManager.m */; };
 		25F966AC1CCE162700FA1717 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F966AB1CCE162700FA1717 /* MainViewController.m */; };
 		25F966AF1CCE17A900FA1717 /* AFNetCheckState.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F966AE1CCE17A900FA1717 /* AFNetCheckState.m */; };
+		25F966BE1CCE226B00FA1717 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25F966B91CCE226B00FA1717 /* MBProgressHUD.bundle */; };
+		25F966BF1CCE226B00FA1717 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F966BB1CCE226B00FA1717 /* MBProgressHUD.m */; };
+		25F966C01CCE226B00FA1717 /* UIView+UIViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F966BD1CCE226B00FA1717 /* UIView+UIViewUtils.m */; };
+		25F966C21CCE236500FA1717 /* jiazai_.png in Resources */ = {isa = PBXBuildFile; fileRef = 25F966C11CCE236500FA1717 /* jiazai_.png */; };
 		FBB1A7B8CBD04DCFA48A36ED /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501574F5D5B18EB5C17CCA5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +72,13 @@
 		25F966AB1CCE162700FA1717 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		25F966AD1CCE17A900FA1717 /* AFNetCheckState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetCheckState.h; sourceTree = "<group>"; };
 		25F966AE1CCE17A900FA1717 /* AFNetCheckState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetCheckState.m; sourceTree = "<group>"; };
+		25F966B01CCE1FDD00FA1717 /* AFNHttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNHttp.h; sourceTree = "<group>"; };
+		25F966B91CCE226B00FA1717 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		25F966BA1CCE226B00FA1717 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		25F966BB1CCE226B00FA1717 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		25F966BC1CCE226B00FA1717 /* UIView+UIViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UIViewUtils.h"; sourceTree = "<group>"; };
+		25F966BD1CCE226B00FA1717 /* UIView+UIViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UIViewUtils.m"; sourceTree = "<group>"; };
+		25F966C11CCE236500FA1717 /* jiazai_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jiazai_.png; sourceTree = "<group>"; };
 		5501574F5D5B18EB5C17CCA5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		64F7A746DE31792906FB3685 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D7508D54177C5887B50EFE3F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +203,7 @@
 		25F9669A1CCE159F00FA1717 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				25F966B81CCE226B00FA1717 /* HUDProgress */,
 				25F9669B1CCE159F00FA1717 /* AFNHttpHelper */,
 				25F966A31CCE159F00FA1717 /* Controller */,
 				25F966AA1CCE162700FA1717 /* MainViewController.h */,
@@ -205,13 +217,14 @@
 		25F9669B1CCE159F00FA1717 /* AFNHttpHelper */ = {
 			isa = PBXGroup;
 			children = (
+				25F966B01CCE1FDD00FA1717 /* AFNHttp.h */,
+				25F966A21CCE159F00FA1717 /* HZAFNConfig.h */,
 				25F9669C1CCE159F00FA1717 /* AFHttpTool.h */,
 				25F9669D1CCE159F00FA1717 /* AFHttpTool.m */,
 				25F9669E1CCE159F00FA1717 /* AFNHttpHelper.h */,
 				25F9669F1CCE159F00FA1717 /* AFNHttpHelper.m */,
 				25F966A01CCE159F00FA1717 /* ConfigManager.h */,
 				25F966A11CCE159F00FA1717 /* ConfigManager.m */,
-				25F966A21CCE159F00FA1717 /* HZAFNConfig.h */,
 				25F966AD1CCE17A900FA1717 /* AFNetCheckState.h */,
 				25F966AE1CCE17A900FA1717 /* AFNetCheckState.m */,
 			);
@@ -245,6 +258,19 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		25F966B81CCE226B00FA1717 /* HUDProgress */ = {
+			isa = PBXGroup;
+			children = (
+				25F966C11CCE236500FA1717 /* jiazai_.png */,
+				25F966B91CCE226B00FA1717 /* MBProgressHUD.bundle */,
+				25F966BA1CCE226B00FA1717 /* MBProgressHUD.h */,
+				25F966BB1CCE226B00FA1717 /* MBProgressHUD.m */,
+				25F966BC1CCE226B00FA1717 /* UIView+UIViewUtils.h */,
+				25F966BD1CCE226B00FA1717 /* UIView+UIViewUtils.m */,
+			);
+			path = HUDProgress;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +380,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2531BE771CC6059C00C5D6B7 /* LaunchScreen.storyboard in Resources */,
+				25F966C21CCE236500FA1717 /* jiazai_.png in Resources */,
+				25F966BE1CCE226B00FA1717 /* MBProgressHUD.bundle in Resources */,
 				2531BE741CC6059C00C5D6B7 /* Assets.xcassets in Resources */,
 				2531BE721CC6059C00C5D6B7 /* Main.storyboard in Resources */,
 			);
@@ -432,8 +460,10 @@
 				25F966AF1CCE17A900FA1717 /* AFNetCheckState.m in Sources */,
 				25F966A71CCE159F00FA1717 /* AFHttpTool.m in Sources */,
 				2531BEA01CC6060200C5D6B7 /* ViewController.m in Sources */,
+				25F966BF1CCE226B00FA1717 /* MBProgressHUD.m in Sources */,
 				2531BE9F1CC6060200C5D6B7 /* AppDelegate.m in Sources */,
 				25F966AC1CCE162700FA1717 /* MainViewController.m in Sources */,
+				25F966C01CCE226B00FA1717 /* UIView+UIViewUtils.m in Sources */,
 				2531BE691CC6059C00C5D6B7 /* main.m in Sources */,
 				25F966A91CCE159F00FA1717 /* ConfigManager.m in Sources */,
 			);

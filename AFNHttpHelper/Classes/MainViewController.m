@@ -13,6 +13,7 @@
 //#import "NextViewController.h"
 #import "AFHttpTool.h"
 #import "AFNetCheckState.h"
+#import "UIView+UIViewUtils.h"
 
 typedef void(^testBlock)(NSString * names);
 
@@ -41,11 +42,35 @@ typedef void(^testBlock)(NSString * names);
 
     self.title = @"网络请求";
     
-//    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    btn.frame = CGRectMake(100, 200, 100, 100);
-//    btn.backgroundColor = [UIColor redColor];
-//    [btn addTarget:self action:@selector(testCliclAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn];
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(50, 200, 100, 80);
+    btn.backgroundColor = [UIColor orangeColor];
+    [btn setTitle:@"Tool(GET)" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(ToolGET:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
+    UIButton * btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn1.frame = CGRectMake(170, 200, 100, 80);
+    btn1.backgroundColor = [UIColor orangeColor];
+    [btn1 setTitle:@"Tool(POST)" forState:UIControlStateNormal];
+    [btn1 addTarget:self action:@selector(ToolPost:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn1];
+    
+    
+    
+    UIButton * btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn3.frame = CGRectMake(50, 300, 120, 80);
+    btn3.backgroundColor = [UIColor orangeColor];
+    [btn3 setTitle:@"HELPER(GET)" forState:UIControlStateNormal];
+    [btn3 addTarget:self action:@selector(HelperGET:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn3];
+    
+    UIButton * btn4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn4.frame = CGRectMake(200, 300, 130, 80);
+    btn4.backgroundColor = [UIColor orangeColor];
+    [btn4 setTitle:@"HELPER(POST)" forState:UIControlStateNormal];
+    [btn4 addTarget:self action:@selector(HelperPOST:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn4];
 
 
     
@@ -79,19 +104,70 @@ typedef void(^testBlock)(NSString * names);
     
     
     // 测试网络
-    AFNetCheckState * states = [AFNetCheckState NetCheckState];
+   // AFNetCheckState * states = [AFNetCheckState NetCheckState];
     
     
     
     
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 100, 320, 100)];
     [self.view addSubview:self.imageView];
-    
-    
-    
-   
+
 }
 
+-(void)ToolGET:(UIButton *)sender {
+    [self.view showHUDIndicatorViewAtCenter:@"加载中"];
+    NSDictionary * parameters = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
+    [[AFHttpTool defaultManager] requestHttpByUserWithString:@"list" parameters:parameters success:^(id responseObject) {
+        NSLog(@"----->>>>%@",responseObject);
+        [self.view hideHUDIndicatorViewAtCenter];
+    } failure:^(NSError *error) {
+        NSLog(@"---<<<<<<%@",error);
+        [self.view hideHUDIndicatorViewAtCenter];
+    }];
+}
+
+/**
+ *  tool---POST
+ *
+ *  @param sender <#sender description#>
+ */
+-(void)ToolPost:(UIButton *)sender {
+    [self.view showHUDIndicatorViewAtCenter:@"加载中"];
+    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
+    [[AFHttpTool defaultManager] requestHttpByUserWithString:@"login" parameters:parameters success:^(id responseObject) {
+        NSLog(@"----->>>>%@",responseObject);
+        [self.view hideHUDIndicatorViewAtCenter];
+    } failure:^(NSError *error) {
+        NSLog(@"---<<<<<<%@",error);
+        [self.view hideHUDIndicatorViewAtCenter];
+    }];
+}
+
+-(void)HelperGET:(UIButton *)sender {
+    [self.view showHUDIndicatorViewAtCenter:@"HelperGET加载"];
+    NSDictionary * parameterslist = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
+        [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"list" parameters:parameterslist success:^(id responseObject) {
+            NSLog(@"---->>>>%@",responseObject);
+            [self.view hideHUDIndicatorViewAtCenter];
+        } failure:^(id error) {
+            NSLog(@"----<<<<<<<%@",error);
+         [self.view showHUDIndicatorViewErrorAtCenter:@"加载失败"];
+        }];
+}
+
+-(void)HelperPOST:(UIButton *)sender {
+//    [self.view showHUDIndicatorViewSuccessAtCenter:@"加载成功"];
+    
+    [self.view showHUDIndicatorViewAtCenter:@"HelperPOST加载"];
+    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
+        [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"login" parameters:parameters success:^(id responseObject) {
+            NSLog(@"---->>>>%@",responseObject);
+            [self.view hideHUDIndicatorViewAtCenter];
+        } failure:^(id error) {
+            NSLog(@"----<<<<<<<%@",error);
+            [self.view showHUDIndicatorViewErrorAtCenter:@"加载失败"];
+        }];
+}
 -(void)test2 {
     
     //    [self basicURLRequest];
