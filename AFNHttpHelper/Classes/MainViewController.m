@@ -10,8 +10,9 @@
 #import "AFNetworking.h"
 #import "Additions.h"
 #import "AFNHttpHelper.h"
-#import "NextViewController.h"
+//#import "NextViewController.h"
 #import "AFHttpTool.h"
+#import "AFNetCheckState.h"
 
 typedef void(^testBlock)(NSString * names);
 
@@ -53,30 +54,32 @@ typedef void(^testBlock)(NSString * names);
     
     
 //    NSDictionary * parameters = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
-//    [[AFHttpTool defaultManager] requestHttpByUserWithString:@"GET" parameters:parameters success:^(id responseObject) {
+//    [[AFHttpTool defaultManager] requestHttpByUserWithString:@"list" parameters:parameters success:^(id responseObject) {
 //        NSLog(@"----->>>>%@",responseObject);
 //    } failure:^(NSError *error) {
 //        NSLog(@"---<<<<<<%@",error);
 //    }];
     
     
-    NSDictionary * parameterslist = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
+//    NSDictionary * parameterslist = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
+//    
+//    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
+//    [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"login" parameters:parameters success:^(id responseObject) {
+//        NSLog(@"---->>>>%@",responseObject);
+//    } failure:^(id error) {
+//        NSLog(@"----<<<<<<<%@",error);
+//    }];
+//    
+//    
+//    [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"list" parameters:parameterslist success:^(id responseObject) {
+//        NSLog(@"---->>>>%@",responseObject);
+//    } failure:^(id error) {
+//        NSLog(@"----<<<<<<<%@",error);
+//    }];
     
-    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
-    [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"login" parameters:parameters success:^(id responseObject) {
-        NSLog(@"---->>>>%@",responseObject);
-    } failure:^(id error) {
-        NSLog(@"----<<<<<<<%@",error);
-    }];
     
-    
-    [[AFNHttpHelper defaultManager] requestHttpByUserWithString:@"list" parameters:parameterslist success:^(id responseObject) {
-        NSLog(@"---->>>>%@",responseObject);
-    } failure:^(id error) {
-        NSLog(@"----<<<<<<<%@",error);
-    }];
-    
-    
+    // 测试网络
+    AFNetCheckState * states = [AFNetCheckState NetCheckState];
     
     
     
@@ -126,11 +129,11 @@ typedef void(^testBlock)(NSString * names);
 
 
 -(void)testCliclAction {
-    NextViewController * next = [[NextViewController alloc] init];
-    //next.cancelBlock = ^(NSString * str ) {
-//        NSLog(@"------");
-//    };
-    [self.navigationController pushViewController:next animated:YES];
+//    NextViewController * next = [[NextViewController alloc] init];
+//    //next.cancelBlock = ^(NSString * str ) {
+////        NSLog(@"------");
+////    };
+//    [self.navigationController pushViewController:next animated:YES];
     
    
 }

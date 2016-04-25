@@ -14,13 +14,6 @@
 
 
 
-typedef enum{
-    NetStatusNotReachable,
-    NetStatusReachableViaWiFi,
-    NetStatusReachableViaWWAN,
-    NetStatusReachabilityUnknown
-} NetStatus;
-
 typedef void(^SuccessBlock)(id responseObject);
 typedef void(^FailureBlock)(NSError *error);
 

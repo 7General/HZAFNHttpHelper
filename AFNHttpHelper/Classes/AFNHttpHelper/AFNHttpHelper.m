@@ -6,13 +6,15 @@
 //  Copyright © 2016年 王会洲. All rights reserved.
 //
 
-#define TIMEOUT  10
+
 
 
 #import "AFNHttpHelper.h"
 #import "AFNetworking.h"
 #import "ConfigManager.h"
 #import "Additions.h"
+#import "HZAFNConfig.h"
+
 
 @implementation AFNHttpHelper
 

@@ -6,7 +6,6 @@
 //  Copyright © 2016年 王会洲. All rights reserved.
 //
 
-//最大请求超时时间
 
 
 #import "AFHttpTool.h"
@@ -16,7 +15,7 @@
 /**
  *  全部任务存放的数组
  */
-@property (nonatomic, strong) NSMutableArray * allTasks;
+@property (nonatomic, strong) NSMutableArray * TasksQueue;
 @end
 
 
@@ -44,11 +43,11 @@
 /**
  *  初始化一个堆栈区
  */
--(NSMutableArray *)allTasks {
-    if (_allTasks == nil) {
-        _allTasks = [NSMutableArray new];
+-(NSMutableArray *)TasksQueue {
+    if (_TasksQueue == nil) {
+        _TasksQueue = [NSMutableArray new];
     }
-    return _allTasks;
+    return _TasksQueue;
 }
 
 
@@ -90,55 +89,7 @@
 }
 
 
-/**
- *  监测网络请求是否可用
- */
-- (BOOL)isConnectionAvailable
-{
-//    AFHTTPSessionManager *manager = [self baseHttpRequest];
-//    __block NetStatus isExistenceNetwork = -1;
-//    
-//    [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-//        
-//        switch (status) {
-//            case AFNetworkReachabilityStatusReachableViaWiFi:
-//                isExistenceNetwork = NetStatusReachableViaWiFi;
-//                NSLog(@"WIFI");
-//                break;
-//                
-//            case AFNetworkReachabilityStatusReachableViaWWAN:
-//                isExistenceNetwork = NetStatusReachableViaWWAN;
-//                NSLog(@"自带网络");
-//                break;
-//                
-//            case AFNetworkReachabilityStatusNotReachable:
-//                isExistenceNetwork = NetStatusNotReachable;
-//                NSLog(@"没有网络");
-//                //没有网络弹窗提示
-//                if (!isExistenceNetwork) {
-//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"当前网络不可用,请检查网络连接!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//                    [alertView show];
-//                }
-//                break;
-//                
-//            case AFNetworkReachabilityStatusUnknown:
-//                isExistenceNetwork = NetStatusReachabilityUnknown;
-//                NSLog(@"未知网络");
-//                break;
-//            default:
-//                break;
-//        }
-//        
-//    }];
-//    
-//    //开始监听
-//    [manager.reachabilityManager startMonitoring];
-//    
-//    //返回网络枚举值
-//    return isExistenceNetwork;
-    
-    return YES;
-}
+
 
 
 
@@ -158,7 +109,7 @@
     }];
     
     //当前网络请求任务添加到数组
-    [self.allTasks addObject:currentDataTask];
+    [self.TasksQueue addObject:currentDataTask];
     
     //返回该网络请求任务
     return currentDataTask;
@@ -180,7 +131,7 @@
     }];
     
     //当前网络请求任务添加到数组
-    [self.allTasks addObject:currentDataTask];
+    [self.TasksQueue addObject:currentDataTask];
 
     //返回该网络请求任务
     return currentDataTask;
@@ -193,6 +144,8 @@
     NSDictionary *requestDic =[ConfigManager requestDicWithString:requstString];
     NSString * url = [requestDic objectForKey:@"url"];
     NSString *method =[requestDic objectForKey:@"method"];
+    
+    
     if ([method isEqualToString:@"POST"]) {
         NSLog(@"POST");
         [self POST:url params:parameters success:success failure:failure];
@@ -212,8 +165,8 @@
  */
 - (void)cancelAllOperations
 {
-    [self.allTasks makeObjectsPerformSelector:@selector(cancel)];
-    [self.allTasks removeAllObjects];
+    [self.TasksQueue makeObjectsPerformSelector:@selector(cancel)];
+    [self.TasksQueue removeAllObjects];
     
 }
 
@@ -222,8 +175,8 @@
  */
 - (void)cancelCurrentOperation
 {
-    [[self.allTasks lastObject] cancel];
-    [self.allTasks removeLastObject];
+    [[self.TasksQueue lastObject] cancel];
+    [self.TasksQueue removeLastObject];
 }
 
 
