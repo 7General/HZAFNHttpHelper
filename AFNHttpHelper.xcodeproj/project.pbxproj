@@ -68,8 +68,8 @@
 		25F966A01CCE159F00FA1717 /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigManager.h; sourceTree = "<group>"; };
 		25F966A11CCE159F00FA1717 /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
 		25F966A21CCE159F00FA1717 /* HZAFNConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZAFNConfig.h; sourceTree = "<group>"; };
-		25F966AA1CCE162700FA1717 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		25F966AB1CCE162700FA1717 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		25F966AA1CCE162700FA1717 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../MainViewController.h; sourceTree = "<group>"; };
+		25F966AB1CCE162700FA1717 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ../MainViewController.m; sourceTree = "<group>"; };
 		25F966AD1CCE17A900FA1717 /* AFNetCheckState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetCheckState.h; sourceTree = "<group>"; };
 		25F966AE1CCE17A900FA1717 /* AFNetCheckState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetCheckState.m; sourceTree = "<group>"; };
 		25F966B01CCE1FDD00FA1717 /* AFNHttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNHttp.h; sourceTree = "<group>"; };
@@ -206,8 +206,6 @@
 				25F966B81CCE226B00FA1717 /* HUDProgress */,
 				25F9669B1CCE159F00FA1717 /* AFNHttpHelper */,
 				25F966A31CCE159F00FA1717 /* Controller */,
-				25F966AA1CCE162700FA1717 /* MainViewController.h */,
-				25F966AB1CCE162700FA1717 /* MainViewController.m */,
 				25F966A41CCE159F00FA1717 /* Home */,
 				25F966A61CCE159F00FA1717 /* Model */,
 			);
@@ -234,6 +232,8 @@
 		25F966A31CCE159F00FA1717 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				25F966AA1CCE162700FA1717 /* MainViewController.h */,
+				25F966AB1CCE162700FA1717 /* MainViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

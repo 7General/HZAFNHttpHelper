@@ -42,6 +42,9 @@ typedef void(^testBlock)(NSString * names);
 
     self.title = @"网络请求";
     
+    [self AFNBasicGETRequest];
+    
+    return;
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(50, 200, 100, 80);
     btn.backgroundColor = [UIColor orangeColor];
@@ -230,6 +233,9 @@ typedef void(^testBlock)(NSString * names);
     
 }
 
+/**
+ *  基于AFN的网络POST请求
+ */
 -(void)AFNHttpPostRequest {
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager * manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -257,13 +263,15 @@ typedef void(^testBlock)(NSString * names);
 }
 
 
+/**
+ *  基本的POST请求
+ */
 -(void)BasicPostRequst {
     //1.创建会话对象
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession * session = [NSURLSession sessionWithConfiguration:configuration];
     //2.根据会话对象创建task
     NSURL *url = [NSURL URLWithString:@"http://icloud.chinacloudapp.cn/icloud/app/v1/user/userlogin.do"];
-    
     //3.创建可变的请求对象
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -272,33 +280,21 @@ typedef void(^testBlock)(NSString * names);
     //4.修改请求方法为POST
     request.HTTPMethod = @"POST";
     
-    NSDictionary *parameters = @{@"phone":@"15010206793",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
+    NSDictionary *parameters = @{@"phone":@"18790723015",@"pwd":@"123456",@"device_token":@"71c26d22d85686e37658524adc1541ce88bc05c4f0e788b0ffe315e9e3f98378",@"client_type":@1};
     NSError*  error;
     //5.设置请求体
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     
-    //6.根据会话对象创建一个Task(发送请求）
-    /*
-     26      第一个参数：请求对象
-     27      第二个参数：completionHandler回调（请求完成【成功|失败】的回调）
-     28                 data：响应体信息（期望的数据）
-     29                 response：响应头信息，主要是对服务器端的描述
-     30                 error：错误信息，如果请求失败，则error有值
-     31      */
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         //8.解析数据
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         NSLog(@"%@",dict);
-        
     }];
     
     //7.执行任务
     [dataTask resume];
-    
-    
-    
 }
 
 
@@ -309,26 +305,26 @@ typedef void(^testBlock)(NSString * names);
  *  基本的网络请求
  */
 -(void)basicURLRequest {
-    //1
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://www.okcoin.com/api/ticker.do"]];
-    //2
-    //NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSString *url = @"http://open.qyer.com/qyer/bbs/forum_thread_list?client_id=qyer_android&client_secret=9fcaae8aefc4f9ac4915&forum_id=1&type=1&count=10&page=1&delcache=0";
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession * session = [NSURLSession sessionWithConfiguration:configuration];
-    //3 基本网络请求
+    // 基本网络请求
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (!error) {
-            //4
+            
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            //5
+            
             if (httpResponse.statusCode == 200) {
-                //6
+                
                 NSString *string = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
                 NSLog(@"%@",string);
             }
         }
     }];
-    //7
+    
     [dataTask resume];
 }
 
@@ -352,6 +348,9 @@ typedef void(^testBlock)(NSString * names);
     [task resume];
 }
 
+/**
+ *  基于AFN的网络下载
+ */
 -(void)AFNDownloadImage {
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager * manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
@@ -381,9 +380,7 @@ typedef void(^testBlock)(NSString * names);
     // 设置网络超时
     configuration.timeoutIntervalForRequest = 5;
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
     NSString *url = @"http://open.qyer.com/qyer/bbs/forum_thread_list?client_id=qyer_android&client_secret=9fcaae8aefc4f9ac4915&forum_id=1&type=1&count=10&page=1&delcache=0";
-    
     
     NSURL *URL = [NSURL URLWithString:url];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
@@ -404,23 +401,20 @@ typedef void(^testBlock)(NSString * names);
 
 
 
+/**
+ *  基于AFN的网络GET请求
+ */
 -(void)AFNBasicRequesthttpBody {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    configuration.timeoutIntervalForRequest = 15;
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
 
     NSString *url = @"http://open.qyer.com/qyer/bbs/forum_thread_list";
 
     NSDictionary * dict = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
     
     NSString *URLFellowString = [@"?" stringByAppendingString:[NSString queryStringFromDictionary:dict addingPercentEscapes:YES]];
-    
     NSURL *URL = [NSURL URLWithString:[url stringByAppendingString:URLFellowString]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-
-    
-    
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
             NSLog(@"-------Error: %@", error);
@@ -430,8 +424,6 @@ typedef void(^testBlock)(NSString * names);
     }];
     
     [dataTask resume];
-    
-    
 }
 
 
