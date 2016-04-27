@@ -6,6 +6,13 @@
 
 
 
+该工具类封装了两个模块请求，大家可以任选其一去使用。
+这里无论是发的GET或者POST请求，看官只需要把你要传入的参数搞成字典传入，即可完成。
+
+* HZAFNHttpHelper 使用了AFSessionMannger来Create Data Task
+* AFHttpTool 使用AFHTTPSessionManager 用了他自带的GET和POST方法来完成。
+
+
 ## <a id="HZAFNHttpHelper"></a>HZAFNHttpHelper
 
   ### 发起GET请求
