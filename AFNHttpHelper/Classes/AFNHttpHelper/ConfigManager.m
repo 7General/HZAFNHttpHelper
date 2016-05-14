@@ -9,6 +9,8 @@
 #define APIHOSTGET @"http://open.qyer.com/qyer/bbs/forum_thread_list"
 #define APIHOSTPOST @"http://icloud.chinacloudapp.cn/icloud"
 
+#define APIHOSTPOSThttps @"https://www.apple.com/"
+
 #import "ConfigManager.h"
 
 @implementation ConfigManager
@@ -34,6 +36,19 @@
         NSMutableDictionary *tem =[[NSMutableDictionary alloc]initWithObjects:@[url,method,params] forKeys:@[@"url",@"method",@"params"]];
         dic =tem;
     }
+    
+    
+    
+    
+    if ([string isEqualToString:@"ssl"]) {
+        NSString *url = APIHOSTPOSThttps;
+//        url =[url stringByAppendingString:@"/app/v1/user/userlogin.do"];
+        NSString *method =@"GET";
+        NSArray *params =[NSArray arrayWithObjects:@"username",@"password", nil];
+        NSMutableDictionary *tem =[[NSMutableDictionary alloc]initWithObjects:@[url,method,params] forKeys:@[@"url",@"method",@"params"]];
+        dic =tem;
+    }
+
     
     return dic;
 }

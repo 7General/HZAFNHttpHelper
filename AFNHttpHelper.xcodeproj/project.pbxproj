@@ -15,6 +15,7 @@
 		2531BE8D1CC6059C00C5D6B7 /* AFNHttpHelperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2531BE8C1CC6059C00C5D6B7 /* AFNHttpHelperUITests.m */; };
 		2531BE9F1CC6060200C5D6B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2531BE9C1CC6060200C5D6B7 /* AppDelegate.m */; };
 		2531BEA01CC6060200C5D6B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2531BE9E1CC6060200C5D6B7 /* ViewController.m */; };
+		25DE24461CE03BD500DC8892 /* srca.cer in Resources */ = {isa = PBXBuildFile; fileRef = 25DE24451CE03BD500DC8892 /* srca.cer */; };
 		25F966A71CCE159F00FA1717 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F9669D1CCE159F00FA1717 /* AFHttpTool.m */; };
 		25F966A81CCE159F00FA1717 /* AFNHttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F9669F1CCE159F00FA1717 /* AFNHttpHelper.m */; };
 		25F966A91CCE159F00FA1717 /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F966A11CCE159F00FA1717 /* ConfigManager.m */; };
@@ -61,6 +62,7 @@
 		2531BE9C1CC6060200C5D6B7 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2531BE9D1CC6060200C5D6B7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2531BE9E1CC6060200C5D6B7 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		25DE24451CE03BD500DC8892 /* srca.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = srca.cer; sourceTree = "<group>"; };
 		25F9669C1CCE159F00FA1717 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHttpTool.h; sourceTree = "<group>"; };
 		25F9669D1CCE159F00FA1717 /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHttpTool.m; sourceTree = "<group>"; };
 		25F9669E1CCE159F00FA1717 /* AFNHttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNHttpHelper.h; sourceTree = "<group>"; };
@@ -200,9 +202,18 @@
 			path = Basic;
 			sourceTree = "<group>";
 		};
+		25DE24441CE03BC900DC8892 /* Cer */ = {
+			isa = PBXGroup;
+			children = (
+				25DE24451CE03BD500DC8892 /* srca.cer */,
+			);
+			name = Cer;
+			sourceTree = "<group>";
+		};
 		25F9669A1CCE159F00FA1717 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				25DE24441CE03BC900DC8892 /* Cer */,
 				25F966B81CCE226B00FA1717 /* HUDProgress */,
 				25F9669B1CCE159F00FA1717 /* AFNHttpHelper */,
 				25F966A31CCE159F00FA1717 /* Controller */,
@@ -380,6 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2531BE771CC6059C00C5D6B7 /* LaunchScreen.storyboard in Resources */,
+				25DE24461CE03BD500DC8892 /* srca.cer in Resources */,
 				25F966C21CCE236500FA1717 /* jiazai_.png in Resources */,
 				25F966BE1CCE226B00FA1717 /* MBProgressHUD.bundle in Resources */,
 				2531BE741CC6059C00C5D6B7 /* Assets.xcassets in Resources */,

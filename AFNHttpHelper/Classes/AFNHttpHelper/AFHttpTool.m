@@ -82,9 +82,10 @@
     // 告诉AFN客户端, 将返回的数据当做XML来处理
     //    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
     // 告诉AFN客户端, 将返回的数据当做而进行来数据 (服务器返回什么就是什么)
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
     return manager;
 }
 
@@ -96,9 +97,13 @@
 - (NSURLSessionDataTask *)GET:(NSString *)api params:(NSDictionary *)params successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock
 {
     AFHTTPSessionManager *manager = [self baseHttpRequest];
+    
+    
+    
     NSURLSessionDataTask * currentDataTask = [manager GET:api parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         if (successBlock) {
             successBlock(responseObject);
         }
@@ -167,7 +172,6 @@
 {
     [self.TasksQueue makeObjectsPerformSelector:@selector(cancel)];
     [self.TasksQueue removeAllObjects];
-    
 }
 
 /**
@@ -177,6 +181,12 @@
 {
     [[self.TasksQueue lastObject] cancel];
     [self.TasksQueue removeLastObject];
+}
+
+-(void)nslogOperationCount {
+    
+    NSLog(@"-----operationCount%ld",[self baseHttpRequest].operationQueue.operationCount);
+    NSLog(@"-----arry%ld",self.TasksQueue.count);
 }
 
 

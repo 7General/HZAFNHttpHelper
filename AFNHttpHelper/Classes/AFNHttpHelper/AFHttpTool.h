@@ -11,9 +11,6 @@
 #import "AFNetworking.h"
 
 
-
-
-
 typedef void(^SuccessBlock)(id responseObject);
 typedef void(^FailureBlock)(NSError *error);
 
@@ -62,5 +59,9 @@ typedef void(^FailureBlock)(NSError *error);
  *  取消当前网络所有请求
  */
 - (void)cancelAllOperations;
+
+
+
+-(void)nslogOperationCount;
 
 @end

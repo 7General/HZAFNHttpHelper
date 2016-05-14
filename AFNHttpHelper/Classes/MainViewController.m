@@ -37,12 +37,27 @@ typedef void(^testBlock)(NSString * names);
 //    [self.view appear];
 }
 
+
+-(void)AFNPOST {
+    NSDictionary * dict = @{@"area_code":@"MQ==",@"sig":@"d0666a0915a86d0b2107aa7cb3d1bc2f"};
+    NSString * url = @"http://global.eshuike.com/Itaxer/get_banner_list";
+    
+
+    
+    
+  [[AFHttpTool defaultManager]POST:url params:(dict) success:^(id responseObject) {
+      NSLog(@"---%@",responseObject);
+  } failure:^(NSError *error) {
+      NSLog(@"---%@",error);
+  }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.title = @"网络请求";
-    
-    [self AFNBasicGETRequest];
+    [self AFNPOST];
+    //[self AFNBasicGETRequest];
     
     return;
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -74,6 +89,14 @@ typedef void(^testBlock)(NSString * names);
     [btn4 setTitle:@"HELPER(POST)" forState:UIControlStateNormal];
     [btn4 addTarget:self action:@selector(HelperPOST:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn4];
+    
+    
+    UIButton * btn5 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn5.frame = CGRectMake(200, 400, 130, 80);
+    btn5.backgroundColor = [UIColor orangeColor];
+    [btn5 setTitle:@"HTTPS(GET)" forState:UIControlStateNormal];
+    [btn5 addTarget:self action:@selector(HTTPSGET:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn5];
 
 
     
@@ -109,18 +132,29 @@ typedef void(^testBlock)(NSString * names);
     // 测试网络
    // AFNetCheckState * states = [AFNetCheckState NetCheckState];
     
-    
-    
-    
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 100, 320, 100)];
     [self.view addSubview:self.imageView];
 
 }
 
+
+-(void)HTTPSGET:(UIButton *)sender {
+    [self.view showHUDIndicatorViewAtCenter:@"加载中"];
+    NSDictionary * parameters = @{@"client_id":@"qyer_android"};
+    [[AFHttpTool defaultManager] requestHttpByUserWithString:@"ssl" parameters:parameters success:^(id responseObject) {
+        NSLog(@"----->>>>%@",responseObject);
+        [self.view hideHUDIndicatorViewAtCenter];
+    } failure:^(NSError *error) {
+        NSLog(@"---<<<<<<%@",error);
+        [self.view hideHUDIndicatorViewAtCenter];
+    }];
+}
+
+
 -(void)ToolGET:(UIButton *)sender {
     [self.view showHUDIndicatorViewAtCenter:@"加载中"];
     NSDictionary * parameters = @{@"client_id":@"qyer_android",@"client_secret":@"9fcaae8aefc4f9ac4915",@"forum_id":@"1"};
-    [[AFHttpTool defaultManager] requestHttpByUserWithString:@"list" parameters:parameters success:^(id responseObject) {
+  [[AFHttpTool defaultManager] requestHttpByUserWithString:@"list" parameters:parameters success:^(id responseObject) {
         NSLog(@"----->>>>%@",responseObject);
         [self.view hideHUDIndicatorViewAtCenter];
     } failure:^(NSError *error) {
@@ -374,28 +408,66 @@ typedef void(^testBlock)(NSString * names);
 
 
 
+- (AFSecurityPolicy*)customSecurityPolicy
+{
+    // 先导入证书
+    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"Robert Laurence.cer" ofType:nil];//证书的路径
+    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+    // AFSSLPinningModeCertificate 使用证书验证模式
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+    // allowInvalidCertificates 是否允许无效证书（也就是自建的证书），默认为NO  如果是需要验证自建证书，需要设置为YES
+    securityPolicy.allowInvalidCertificates = YES;
+    //validatesDomainName 是否需要验证域名，默认为YES；
+    //假如证书的域名与你请求的域名不一致，需把该项设置为NO；如设成NO的话，即服务器使用其他可信任机构颁发的证书，也可以建立连接，这个非常危险，建议打开。
+    //置为NO，主要用于这种情况：客户端请求的是子域名，而证书上的是另外一个域名。因为SSL证书上的域名是独立的，假如证书上注册的域名是www.google.com，那么mail.google.com是无法验证通过的；当然，有钱可以注册通配符的域名*.google.com，但这个还是比较贵的。
+    //如置为NO，建议自己添加对应域名的校验逻辑。
+    securityPolicy.validatesDomainName = NO;
+    securityPolicy.pinnedCertificates = @[certData];
+    return securityPolicy;
+}
+
+- (AFSecurityPolicy * )SSLPinningModeCertificate {
+        NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"srca.cer" ofType:nil];//证书的路径
+        NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+        // AFSSLPinningModeCertificate 使用证书验证模式
+        AFSecurityPolicy * securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+        securityPolicy.pinnedCertificates = [NSSet setWithObject:certData];
+        securityPolicy.allowInvalidCertificates = YES;
+        [securityPolicy setValidatesDomainName:NO];
+        //self.AFSManager.securityPolicy = securityPolicy;
+    
+    return securityPolicy;
+}
+
+
 
 -(void)AFNBasicGETRequest {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     // 设置网络超时
     configuration.timeoutIntervalForRequest = 5;
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *url = @"http://open.qyer.com/qyer/bbs/forum_thread_list?client_id=qyer_android&client_secret=9fcaae8aefc4f9ac4915&forum_id=1&type=1&count=10&page=1&delcache=0";
     
+
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    //NSString *url = @"http://open.qyer.com/qyer/bbs/forum_thread_list?client_id=qyer_android&client_secret=9fcaae8aefc4f9ac4915&forum_id=1&type=1&count=10&page=1&delcache=0";
+
+    
+    manager.securityPolicy = [self SSLPinningModeCertificate];
+    
+    NSString * url = @"https://www.12306.cn/mormhweb/";
     NSURL *URL = [NSURL URLWithString:url];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        
         if (error) {
-            NSLog(@"Error: %@", error);
+            NSLog(@"Error---->>>: %@", error);
         } else {
-            NSLog(@"%@ %@", response, responseObject);
+            NSLog(@"%@ ---<[[[[[%@", response, responseObject);
         }
     }];
     
     [dataTask resume];
-    
-    
 }
 
 
