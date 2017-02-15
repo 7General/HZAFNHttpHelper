@@ -25,6 +25,7 @@
 		25F966BF1CCE226B00FA1717 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F966BB1CCE226B00FA1717 /* MBProgressHUD.m */; };
 		25F966C01CCE226B00FA1717 /* UIView+UIViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F966BD1CCE226B00FA1717 /* UIView+UIViewUtils.m */; };
 		25F966C21CCE236500FA1717 /* jiazai_.png in Resources */ = {isa = PBXBuildFile; fileRef = 25F966C11CCE236500FA1717 /* jiazai_.png */; };
+		A49366041E54987400CEABF1 /* sssss.m in Sources */ = {isa = PBXBuildFile; fileRef = A49366031E54987400CEABF1 /* sssss.m */; };
 		FBB1A7B8CBD04DCFA48A36ED /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501574F5D5B18EB5C17CCA5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,8 @@
 		25F966C11CCE236500FA1717 /* jiazai_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jiazai_.png; sourceTree = "<group>"; };
 		5501574F5D5B18EB5C17CCA5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		64F7A746DE31792906FB3685 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A49366021E54987400CEABF1 /* sssss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sssss.h; sourceTree = "<group>"; };
+		A49366031E54987400CEABF1 /* sssss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sssss.m; sourceTree = "<group>"; };
 		D7508D54177C5887B50EFE3F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -198,6 +201,8 @@
 				2531BE9C1CC6060200C5D6B7 /* AppDelegate.m */,
 				2531BE9D1CC6060200C5D6B7 /* ViewController.h */,
 				2531BE9E1CC6060200C5D6B7 /* ViewController.m */,
+				A49366021E54987400CEABF1 /* sssss.h */,
+				A49366031E54987400CEABF1 /* sssss.m */,
 			);
 			path = Basic;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				25F966A81CCE159F00FA1717 /* AFNHttpHelper.m in Sources */,
 				25F966AF1CCE17A900FA1717 /* AFNetCheckState.m in Sources */,
 				25F966A71CCE159F00FA1717 /* AFHttpTool.m in Sources */,
+				A49366041E54987400CEABF1 /* sssss.m in Sources */,
 				2531BEA01CC6060200C5D6B7 /* ViewController.m in Sources */,
 				25F966BF1CCE226B00FA1717 /* MBProgressHUD.m in Sources */,
 				2531BE9F1CC6060200C5D6B7 /* AppDelegate.m in Sources */,
